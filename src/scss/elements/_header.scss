@@ -1,0 +1,14 @@
+@import "../settings/variables";
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primaryContainer;
+  color: white;
+  height: 5rem;
+  &__title {
+    font-size: 2rem;
+    font-family: $fontLogo;
+  }
+}
