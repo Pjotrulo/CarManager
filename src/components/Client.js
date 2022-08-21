@@ -6,7 +6,13 @@ const Client = () => {
 
     const api = "https://private-anon-0c45208108-carsapi1.apiary-mock.com/cars";
 
+    const [car, setCar] = useState(null);
+
     const [brand, setBrand] = useState([]);
+    const [selectedBrand, setSelectedBrand] = useState("");
+    const [model, setModel] = useState([]);
+    const [selectedModel, setSelectedModel] = useState("");
+    // const [year, setYear] = useState("");
 
     useEffect(() => {
         fetch(api)
@@ -17,38 +23,49 @@ const Client = () => {
                 throw new Error("Błąd wczytania danych")
             })
             .then(data => {
+                setCar(data)
                 data.map(el => {
-                   return setBrand(prev => [...prev, el.make])
+                    return setBrand(prev => [...prev, el.make])
                 })
+                data.map(el => {
+                    return setModel(prev => [...prev, el.model])
+                })
+                console.log(data)
             })
             .catch((err) => console.log(err))
     }, [])
 
     const allBrands = [];
+    const deleteDuplicateBrands = () => {
 
-    // const [model, setModel] = useState("");
-    // const [year, setYear] = useState("");
-
-        const check = () => {
-            for (let i = 0; i <= brand.length; i++) {
-                if (brand[i] !== brand[i + 1]) {
-                    allBrands.push(brand[i]);
-                }
+        for (let i = 0; i <= brand.length; i++) {
+            if (brand[i] !== brand[i + 1]) {
+                allBrands.push(brand[i]);
             }
         }
-        check();
-
+    }
+    deleteDuplicateBrands();
 
     return (
         <>
             <Header/>
 
-            <select>
-                {brand ? allBrands.map( el => {
+            <select onChange={e => setSelectedBrand(e.target.value)}>
+                {brand ? allBrands.map((el, id) => {
                     return (
-                        <option>{ el }</option>
+                        <option key={id}>{ el }</option>
                     )
                 }) : "Loading..."}
+            </select>
+
+            <select onChange={e => setSelectedModel(e.target.value)}>
+                {car ? car.map((el, id) => {
+                    if(el.make === selectedBrand) {
+                        return (
+                            <option key={id}>{ el.model }</option>
+                        )
+                    }
+                }) : null}
             </select>
 
             <Footer />
