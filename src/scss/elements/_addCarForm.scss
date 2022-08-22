@@ -1,0 +1,49 @@
+@import "../settings/variables";
+
+.main {
+  height: calc(100vh - 5rem);
+  background-color: $backgroundColor;
+  opacity: 0.99;
+  font-family: $font;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__title {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    //padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $colorWhite;
+    padding-bottom: 3rem;
+    label {
+      select {
+        margin-left: 0.5rem;
+      }
+    }
+    select {
+      width: 10rem;
+      margin-top: 1.5rem;
+      border-radius: 0.5rem;
+      background-color: $secondaryContainer;
+      color: $colorWhite;
+      text-transform: uppercase;
+    }
+    button {
+      margin-top: 2.5rem;
+      width: 10rem;
+      border: none;
+      border-radius: 1.25rem;
+      height: 2rem;
+      background-color: $primaryColor;
+      color: $colorWhite;
+      font-family: $font;
+    }
+  }
+}

@@ -12,7 +12,8 @@ const Client = () => {
     const [selectedBrand, setSelectedBrand] = useState("");
     const [model, setModel] = useState([]);
     const [selectedModel, setSelectedModel] = useState("");
-    // const [year, setYear] = useState("");
+    const [year, setYear] = useState([]);
+    const [selectedYear, setSelectedYear] = useState("");
 
     useEffect(() => {
         fetch(api)
@@ -30,14 +31,21 @@ const Client = () => {
                 data.map(el => {
                     return setModel(prev => [...prev, el.model])
                 })
-                console.log(data)
             })
             .catch((err) => console.log(err))
+
+        const years = () => {
+            for(let i = 1950; i <= 2022; i++) {
+                setYear(prev => [...prev, i]);
+            }
+        }
+        return () => {
+            years();
+        }
     }, [])
 
     const allBrands = [];
     const deleteDuplicateBrands = () => {
-
         for (let i = 0; i <= brand.length; i++) {
             if (brand[i] !== brand[i + 1]) {
                 allBrands.push(brand[i]);
@@ -49,24 +57,40 @@ const Client = () => {
     return (
         <>
             <Header/>
-
-            <select onChange={e => setSelectedBrand(e.target.value)}>
-                {brand ? allBrands.map((el, id) => {
-                    return (
-                        <option key={id}>{ el }</option>
-                    )
-                }) : "Loading..."}
-            </select>
-
-            <select onChange={e => setSelectedModel(e.target.value)}>
-                {car ? car.map((el, id) => {
-                    if(el.make === selectedBrand) {
-                        return (
-                            <option key={id}>{ el.model }</option>
-                        )
-                    }
-                }) : null}
-            </select>
+            <section className="main">
+                <h2 className="main__title">Fill Car Information</h2>
+                <form className="main__form">
+                    <label>Brand:
+                        <select onChange={e => setSelectedBrand(e.target.value)}>
+                            {brand ? allBrands.map((el, id) => {
+                                return (
+                                    <option key={id}>{ el }</option>
+                                )
+                            }) : null}
+                        </select>
+                    </label>
+                    <label>Model:
+                        <select onChange={e => setSelectedModel(e.target.value)}>
+                            {car ? car.map((el, id) => {
+                                if(el.make === selectedBrand) {
+                                    return (
+                                        <option key={id}>{ el.model }</option>
+                                    )
+                                }
+                                return null;
+                            }) : null}
+                        </select>
+                    </label>
+                    <label>Year of production:
+                        <select onChange={e => setSelectedYear(e.target.value)}>
+                            {year ? year.map((el, id) => {
+                                return <option key={id}>{ el }</option>
+                            }) : null}
+                        </select>
+                    </label>
+                    <button type="submit">Add car</button>
+                </form>
+            </section>
 
             <Footer />
         </>
