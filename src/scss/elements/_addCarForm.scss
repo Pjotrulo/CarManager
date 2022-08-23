@@ -1,8 +1,8 @@
 @import "../settings/variables";
+@import "../settings/mixins";
 
 .main {
   height: calc(100vh - 5rem);
-  background-color: $backgroundColor;
   opacity: 0.99;
   font-family: $font;
   display: flex;
@@ -13,7 +13,6 @@
     color: white;
     text-align: center;
     font-size: 1.5rem;
-    //padding-top: 1.5rem;
     padding-bottom: 3rem;
   }
   &__form {
@@ -31,7 +30,8 @@
       width: 10rem;
       margin-top: 1.5rem;
       border-radius: 0.5rem;
-      background-color: $secondaryContainer;
+      background-color: $primaryColor;
+      opacity: 0.9;
       color: $colorWhite;
       text-transform: uppercase;
     }
@@ -42,6 +42,7 @@
       border-radius: 1.25rem;
       height: 2rem;
       background-color: $primaryColor;
+      opacity: 0.9;
       color: $colorWhite;
       font-family: $font;
     }

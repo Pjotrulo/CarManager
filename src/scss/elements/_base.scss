@@ -1,0 +1,13 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+body {
+  background-image: $backgroundMobile;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  @include notebook {
+    background-image: $backgroundNotebook;
+  }
+}

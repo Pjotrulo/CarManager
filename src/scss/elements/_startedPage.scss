@@ -3,12 +3,17 @@
 
 .startedPage {
   height: 100vh;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  background-color: $backgroundColor;
+  background-image: $backgroundMobile;
+  background-size: cover;
+  background-position: center;
+  @include notebook {
+    background-image: $backgroundNotebook;
+  }
   &__title {
     color: $colorWhite;
     font-size: 3rem;
@@ -32,10 +37,14 @@
       background-color: $primaryColor;
       color: $colorWhite;
       font-family: $font;
+      @include notebook {
+        opacity: 0.85;
+      }
       &:hover {
         background-color: $primaryContainer;
         box-shadow: 0 0.5rem 2rem 0 rgba(0, 0 ,0, 0.16);
         transition: 0.2s;
+        opacity: 1;
       }
       @include tablet {
         margin-left: 1rem;

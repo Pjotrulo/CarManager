@@ -10,10 +10,10 @@ const Client = () => {
 
     const [brand, setBrand] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState("");
-    const [model, setModel] = useState([]);
     const [selectedModel, setSelectedModel] = useState("");
     const [year, setYear] = useState([]);
     const [selectedYear, setSelectedYear] = useState("");
+    const [buttonStatus, setButtonStatus] = useState(false);
 
     useEffect(() => {
         fetch(api)
@@ -27,9 +27,6 @@ const Client = () => {
                 setCar(data)
                 data.map(el => {
                     return setBrand(prev => [...prev, el.make])
-                })
-                data.map(el => {
-                    return setModel(prev => [...prev, el.model])
                 })
             })
             .catch((err) => console.log(err))
@@ -54,10 +51,40 @@ const Client = () => {
     }
     deleteDuplicateBrands();
 
+    const databaseApi = "http://localhost:3001";
+
+    const dataCar = {
+        brand: selectedBrand,
+        model: selectedModel,
+        yearOfProduction: selectedYear
+    }
+
+    const addCar = () => {
+        fetch(`${databaseApi}/cars`, {
+            method: "POST",
+            body: JSON.stringify(dataCar),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("Błąd wczytania danych")
+            })
+            .then(dataCar => {
+                console.log(dataCar);
+            })
+            .catch((err) => console.log(err))
+    }
+
+    console.log(buttonStatus);
+
     return (
         <>
             <Header/>
-            <section className="main">
+            {buttonStatus === false ? <section className="main">
                 <h2 className="main__title">Fill Car Information</h2>
                 <form className="main__form">
                     <label>Brand:
@@ -88,10 +115,9 @@ const Client = () => {
                             }) : null}
                         </select>
                     </label>
-                    <button type="submit">Add car</button>
+                    <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); buttonStatus ? setButtonStatus(false) : setButtonStatus(true) }}>Add car</button>
                 </form>
-            </section>
-
+            </section> : "Znikam"}
             <Footer />
         </>
     )

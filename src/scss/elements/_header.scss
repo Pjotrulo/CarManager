@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $backgroundColor;
+  background-color: rgba(0, 0, 0, 0.25);
   color: white;
   height: 5rem;
   &__title {
