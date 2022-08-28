@@ -22,13 +22,15 @@ const ClientCheckCar = () => {
 
     return (
         <section className="client-cars">
+            <div className="client-cars--scroll">
             {car ? car.map((el, id) => {
                 return (
                     <>
-                        <div className="client-cars__car" key={id}><p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p></div>
+                        <div key={id} className="client-cars__car"><p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p></div>
                     </>
                 )
             }) : null}
+            </div>
         </section>
     )
 }

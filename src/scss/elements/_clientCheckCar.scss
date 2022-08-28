@@ -7,8 +7,12 @@
   align-items: center;
   flex-direction: column;
   margin-top: 2rem;
+  height: calc(100vh - 10rem);
+  overflow: scroll;
+  &--scroll {
+    height: 100%;
+  }
   &__car {
-    //border: 2px solid red;
     width: 12rem;
     height: 8rem;
     padding-left: .5rem;

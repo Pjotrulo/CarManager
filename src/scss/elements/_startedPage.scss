@@ -29,14 +29,7 @@
     }
     button {
       margin-bottom: 2rem;
-      border: none;
-      border-radius: 1.25rem;
-      padding-right: 3rem;
-      padding-left: 3rem;
-      height: 2.5rem;
       background-color: rgba(214, 104, 25, 0.8);
-      color: $colorWhite;
-      font-family: $font;
       @include notebook {
         background-color: rgba(214, 104, 25, 0.5);
       }

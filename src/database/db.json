@@ -1,5 +1,40 @@
 {
   "cars": [
-
+    {
+      "brand": "buick",
+      "model": "regal",
+      "yearOfProduction": "1960",
+      "id": 1
+    },
+    {
+      "brand": "lamborghini",
+      "model": "huracan",
+      "yearOfProduction": "1961",
+      "id": 2
+    },
+    {
+      "brand": "mercedes-benz",
+      "model": "gle-class-coupe",
+      "yearOfProduction": "2010",
+      "id": 3
+    },
+    {
+      "brand": "acura",
+      "model": "rlx",
+      "yearOfProduction": "1979",
+      "id": 4
+    },
+    {
+      "brand": "aston-martin",
+      "model": "db9-gt",
+      "yearOfProduction": "2013",
+      "id": 5
+    },
+    {
+      "brand": "cadillac",
+      "model": "cts-v",
+      "yearOfProduction": "1954",
+      "id": 6
+    }
   ]
 }

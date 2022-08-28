@@ -5,8 +5,8 @@ import {
 } from "react-router-dom";
 import './App.scss';
 import StartPage from "./components/StartPage";
-import Client from "./components/Client";
-import Garage from "./components/Garage";
+import Client from "./components/client/Client";
+import Garage from "./components/garage/Garage";
 
 function App() {
 
