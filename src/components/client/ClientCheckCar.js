@@ -3,30 +3,44 @@ import React, {useEffect, useState} from "react";
 const ClientCheckCar = () => {
 
     const [car, setCar] = useState(null);
+    const [reloadCheckCar, setReloadCheckCar] = useState([]);
 
     const api = "http://localhost:3001/cars";
 
     useEffect(() => {
-        fetch(api)
-            .then((res) => {
-                if(res.ok) {
-                    return res.json();
-                }
-                throw new Error("Błąd wczytywania danych")
-            })
-            .then(data => {
-                setCar(data)
-            })
+            fetch(api)
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error("Błąd wczytywania danych")
+                })
+                .then(data => {
+                    setCar(data)
+                })
+                .catch((err) => console.log(err))
+    }, [reloadCheckCar])
+
+    const removeCar = (id) => {
+        fetch(`${api}/${id}`, {
+            method: "DELETE",
+        })
             .catch((err) => console.log(err))
-    }, [])
+        setReloadCheckCar(id)
+    }
 
     return (
         <section className="client-cars">
             <div className="client-cars--scroll">
-            {car ? car.map((el, id) => {
+            {car ? car.map((el) => {
                 return (
                     <>
-                        <div key={id} className="client-cars__car"><p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p></div>
+                        <div key={el.id} className="client-cars__car">
+                            <div className="car-info">
+                                <p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p>
+                            </div>
+                            <button onClick={ () => { removeCar(el.id) } }>X</button>
+                        </div>
                     </>
                 )
             }) : null}

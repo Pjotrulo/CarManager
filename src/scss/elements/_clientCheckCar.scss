@@ -15,7 +15,6 @@
   &__car {
     width: 12rem;
     height: 8rem;
-    padding-left: .5rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
     text-transform: capitalize;
@@ -23,7 +22,24 @@
     background-color: rgba(28, 37, 52, 0.7);
     font-family: $font;
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      align-self: flex-start;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
   }
+}
+
+.car-info {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin-left: 1rem;
 }
