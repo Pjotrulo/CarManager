@@ -5,23 +5,71 @@ import ClientRepairCar from "./ClientRepairCar";
 
 const ClientManagementPanel = () => {
 
-    const [buttonAddCar, setButtonAddCar] = useState(false);
-    const [buttonCheckCar, setButtonCheckCar] = useState(false);
-    const [buttonRepairCar, setButtonRepairCar] = useState(false);
-    const [activeButtonAddCarColor, setActiveButtonAddCarColor] = useState("")
-    const [activeButtonCheckCarColor, setActiveButtonCheckCarColor] = useState("")
-    const [activeButtonRepairCarColor, setActiveButtonRepairCarColor] = useState("")
+    const [buttonAddCar, setButtonAddCar] = useState({
+        "bool": false,
+        "color": ""
+    });
+    const [buttonCheckCar, setButtonCheckCar] = useState({
+        "bool": false,
+        "color": ""
+    });
+    const [buttonRepairCar, setButtonRepairCar] = useState({
+        "bool": false,
+        "color": ""
+    });
 
     return (
         <section className="management">
             <div className="management__nav">
-                <button style={{backgroundColor: `${activeButtonAddCarColor}`}} onClick={() => {setButtonAddCar(true); setActiveButtonAddCarColor("#b84210"); setActiveButtonCheckCarColor(""); setActiveButtonRepairCarColor(""); setButtonCheckCar(false); setButtonRepairCar(false)}}>Add new car</button>
-                <button style={{backgroundColor: `${activeButtonCheckCarColor}`}} onClick={() => {setButtonCheckCar(true); setActiveButtonCheckCarColor("#b84210"); setActiveButtonRepairCarColor(""); setActiveButtonAddCarColor(""); setButtonAddCar(false); setButtonRepairCar(false)}}>Check car</button>
-                <button style={{backgroundColor: `${activeButtonRepairCarColor}`}} onClick={() => {setButtonRepairCar(true); setActiveButtonRepairCarColor("#b84210"); setActiveButtonCheckCarColor(""); setActiveButtonAddCarColor(""); setButtonAddCar(false); setButtonCheckCar(false)}}>Repair car</button>
+                <button style={{backgroundColor: `${buttonAddCar.color}`}} onClick={() => {setButtonAddCar(prev => ({
+                    ...prev,
+                    "bool": true,
+                    "color": "#b84210"
+                }));
+                    setButtonCheckCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }));
+                    setButtonRepairCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }))}}>Add new car</button>
+                <button style={{backgroundColor: `${buttonCheckCar.color}`}} onClick={() => {setButtonCheckCar(prev => ({
+                    ...prev,
+                    "bool": true,
+                    "color": "#b84210"
+                }));
+                    setButtonAddCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }));
+                    setButtonRepairCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }))}}>Check car</button>
+                <button style={{backgroundColor: `${buttonRepairCar.color}`}} onClick={() => {setButtonRepairCar(prev => ({
+                    ...prev,
+                    "bool": true,
+                    "color": "#b84210"
+                }));
+                    setButtonAddCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }));
+                    setButtonCheckCar(prev => ({
+                        ...prev,
+                        "bool": false,
+                        "color": ""
+                    }))}}>Repair car</button>
             </div>
-            {buttonAddCar ? <ClientAddCarForm /> : null}
-            {buttonCheckCar ? <ClientCheckCar /> : null}
-            {buttonRepairCar ? <ClientRepairCar /> : null}
+            {buttonAddCar.bool ? <ClientAddCarForm /> : null}
+            {buttonCheckCar.bool ? <ClientCheckCar /> : null}
+            {buttonRepairCar.bool ? <ClientRepairCar /> : null}
         </section>
     )
 }
