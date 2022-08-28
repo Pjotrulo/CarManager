@@ -27,14 +27,12 @@ const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
             })
             .catch((err) => console.log(err))
 
-        const years = () => {
+            const years = [];
             for(let i = 1950; i <= 2022; i++) {
-                setYear(prev => [...prev, i]);
+                years.push(i);
             }
-        }
-        return () => {
-            years();
-        }
+            setYear(years);
+
     }, [])
 
     const allBrands = [];
@@ -57,7 +55,7 @@ const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
 
     const addCar = () => {
         fetch(`${databaseApi}/cars`, {
-            method: "DELETE",
+            method: "POST",
             body: JSON.stringify(dataCar),
             headers: {
                 "Content-Type": "application/json"
@@ -106,7 +104,7 @@ const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
                         }) : null}
                     </select>
                 </label>
-                <button type="submit" onClick={(e) => {e.preventDefault(); buttonStatus ? setButtonStatus(false) : setButtonStatus(true) }}>Add car</button>
+                <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
             </form>
         </section>
     )
