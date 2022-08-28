@@ -1,5 +1,28 @@
 {
   "cars": [
-
+    {
+      "brand": "chevrolet",
+      "model": "camaro",
+      "yearOfProduction": "2018",
+      "id": 1
+    },
+    {
+      "brand": "infiniti",
+      "model": "qx60",
+      "yearOfProduction": "2014",
+      "id": 2
+    },
+    {
+      "brand": "ferrari",
+      "model": "ff",
+      "yearOfProduction": "1979",
+      "id": 3
+    },
+    {
+      "brand": "mitsubishi",
+      "model": "outlander-sport",
+      "yearOfProduction": "1975",
+      "id": 4
+    }
   ]
 }

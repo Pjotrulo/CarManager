@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Loading from "./Loading";
+import Loader from "./Loader";
 
 const ClientAddCarForm = () => {
 
@@ -98,7 +98,7 @@ const ClientAddCarForm = () => {
                         }) : null}
                     </select>
                 </label>
-                <label>Year of production:
+                <label>Year:
                     <select onChange={e => setSelectedYear(e.target.value)}>
                         {year ? year.map((el, id) => {
                             return <option key={id}>{ el }</option>
@@ -106,7 +106,7 @@ const ClientAddCarForm = () => {
                     </select>
                 </label>
                 <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
-            </form> : <Loading />}
+            </form> : <Loader />}
         </section>
     )
 }

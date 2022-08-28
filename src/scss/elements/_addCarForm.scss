@@ -2,7 +2,7 @@
 @import "../settings/mixins";
 
 .main {
-  height: calc(100vh - 5rem);
+  margin-top: 5rem;
   opacity: 0.99;
   font-family: $font;
   display: flex;
@@ -16,11 +16,15 @@
     padding-bottom: 3rem;
   }
   &__form {
+    background-color: rgba(28, 37, 52, 0.7);
+    border-radius: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: $colorWhite;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     label {
       select {
         margin-left: 0.5rem;
@@ -30,7 +34,7 @@
       width: 10rem;
       margin-top: 1.5rem;
       border-radius: 0.5rem;
-      background-color: $primaryColor;
+      background-color: $secondaryContainer;
       opacity: 0.9;
       color: $colorWhite;
       text-transform: uppercase;
@@ -41,7 +45,7 @@
       border: none;
       border-radius: 1.25rem;
       height: 2rem;
-      background-color: $primaryColor;
+      background-color: $secondaryContainer;
       opacity: 0.9;
       color: $colorWhite;
       font-family: $font;

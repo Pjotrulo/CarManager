@@ -20,16 +20,16 @@ const ClientCheckCar = () => {
             .catch((err) => console.log(err))
     }, [])
 
-    console.log(car);
-
     return (
-        <ul className="list">
+        <section className="client-cars">
             {car ? car.map((el, id) => {
                 return (
-                    <li key={id}>{el.brand}-{el.model}-{el.yearOfProduction}</li>
+                    <>
+                        <div className="client-cars__car" key={id}><p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p></div>
+                    </>
                 )
             }) : null}
-        </ul>
+        </section>
     )
 }
 
