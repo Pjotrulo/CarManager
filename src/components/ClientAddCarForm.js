@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
+import Loading from "./Loading";
 
-const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
+const ClientAddCarForm = () => {
 
     const [car, setCar] = useState(null);
     const [brand, setBrand] = useState([]);
@@ -73,7 +74,7 @@ const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
     return (
         <section className="main">
             <h2 className="main__title">Fill Car Information</h2>
-            <form className="main__form">
+            {car ? <form className="main__form">
                 <label>Brand:
                     <select onChange={e => setSelectedBrand(e.target.value)}>
                         <option>...</option>
@@ -105,7 +106,7 @@ const ClientAddCarForm = ({buttonStatus, setButtonStatus}) => {
                     </select>
                 </label>
                 <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
-            </form>
+            </form> : <Loading />}
         </section>
     )
 }
