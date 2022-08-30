@@ -5,7 +5,7 @@ const ClientCheckCar = () => {
     const [car, setCar] = useState(null);
     const [reloadCheckCar, setReloadCheckCar] = useState([]);
 
-    const api = "http://localhost:3001/cars";
+    const api = "http://localhost:3001/clientCars";
 
     useEffect(() => {
             fetch(api)
@@ -22,11 +22,14 @@ const ClientCheckCar = () => {
     }, [reloadCheckCar])
 
     const removeCar = (id) => {
-        fetch(`${api}/${id}`, {
-            method: "DELETE",
-        })
-            .catch((err) => console.log(err))
-        setReloadCheckCar(id)
+        const areYouSure = window.confirm("Are you sure?");
+        if(areYouSure) {
+            fetch(`${api}/${id}`, {
+                method: "DELETE",
+            })
+                .catch((err) => console.log(err))
+            setReloadCheckCar(id)
+        }
     }
 
     return (

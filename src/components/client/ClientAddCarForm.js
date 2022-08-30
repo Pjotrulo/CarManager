@@ -55,7 +55,7 @@ const ClientAddCarForm = () => {
     }
 
     const addCar = () => {
-        fetch(`${databaseApi}/cars`, {
+        fetch(`${databaseApi}/clientCars`, {
             method: "POST",
             body: JSON.stringify(dataCar),
             headers: {
@@ -72,9 +72,9 @@ const ClientAddCarForm = () => {
     }
 
     return (
-        <section className="main">
-            <h2 className="main__title">Fill Car Information</h2>
-            {car ? <form className="main__form">
+        <section className="main-add-car">
+            <h2 className="main-add-car__title">Fill Car Information</h2>
+            {car ? <form className="form">
                 <label>Brand:
                     <select onChange={e => setSelectedBrand(e.target.value)}>
                         <option>...</option>
