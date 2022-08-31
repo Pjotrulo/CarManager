@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from "react";
 
-const ClientCheckCar = () => {
+const ClientCheckCar = ({ databaseApi }) => {
 
     const [car, setCar] = useState(null);
     const [reloadCheckCar, setReloadCheckCar] = useState([]);
 
-    const api = "http://localhost:3001/clientCars";
-
     useEffect(() => {
-            fetch(api)
+            fetch(`${databaseApi}/clientCars`)
                 .then((res) => {
                     if (res.ok) {
                         return res.json();
@@ -24,29 +22,27 @@ const ClientCheckCar = () => {
     const removeCar = (id) => {
         const areYouSure = window.confirm("Are you sure?");
         if(areYouSure) {
-            fetch(`${api}/${id}`, {
+            setReloadCheckCar(id)
+            fetch(`${databaseApi}/clientCars/${id}`, {
                 method: "DELETE",
             })
                 .catch((err) => console.log(err))
-            setReloadCheckCar(id)
         }
     }
 
     return (
         <section className="client-cars">
             <div className="client-cars--scroll">
-            {car ? car.map((el) => {
+            { car ? car.map((el) => {
                 return (
-                    <>
-                        <div key={el.id} className="client-cars__car">
-                            <div className="car-info">
-                                <p>{el.brand}</p><p>{el.model}</p><p>{el.yearOfProduction}</p>
-                            </div>
-                            <button onClick={ () => { removeCar(el.id) } }>X</button>
+                    <div key={el.id} className="client-cars__car">
+                        <div className="car-info">
+                            <p>{ el.brand }</p><p>{ el.model }</p><p>{ el.yearOfProduction }</p>
                         </div>
-                    </>
+                        <button onClick={() => { removeCar(el.id) }}>X</button>
+                    </div>
                 )
-            }) : null}
+            }) : null }
             </div>
         </section>
     )

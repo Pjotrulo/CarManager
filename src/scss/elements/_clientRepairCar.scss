@@ -7,5 +7,9 @@
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
-  border: 2px solid red;
+  .form {
+    textarea {
+      resize: none;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import ClientAddCarForm from "./ClientAddCarForm";
+import ClientAddCar from "./ClientAddCar";
 import ClientCheckCar from "./ClientCheckCar";
 import ClientRepairCar from "./ClientRepairCar";
 
 const ClientManagementPanel = () => {
 
     const [buttonAddCar, setButtonAddCar] = useState({
-        "bool": false,
-        "color": ""
+        "bool": true,
+        "color": "#b84210"
     });
     const [buttonCheckCar, setButtonCheckCar] = useState({
         "bool": false,
@@ -17,6 +17,8 @@ const ClientManagementPanel = () => {
         "bool": false,
         "color": ""
     });
+
+    const databaseApi = "http://localhost:3001";
 
     return (
         <section className="management">
@@ -67,9 +69,9 @@ const ClientManagementPanel = () => {
                         "color": ""
                     }))}}>Repair car</button>
             </div>
-            {buttonAddCar.bool ? <ClientAddCarForm /> : null}
-            {buttonCheckCar.bool ? <ClientCheckCar /> : null}
-            {buttonRepairCar.bool ? <ClientRepairCar /> : null}
+            { buttonAddCar.bool ? <ClientAddCar databaseApi={databaseApi} /> : null }
+            { buttonCheckCar.bool ? <ClientCheckCar databaseApi={databaseApi} /> : null }
+            { buttonRepairCar.bool ? <ClientRepairCar databaseApi={databaseApi} /> : null }
         </section>
     )
 }

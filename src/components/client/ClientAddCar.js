@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loader from "../Loader";
 
-const ClientAddCarForm = () => {
+const ClientAddCar = ({ databaseApi }) => {
 
     const [car, setCar] = useState(null);
     const [brand, setBrand] = useState([]);
@@ -46,9 +46,7 @@ const ClientAddCarForm = () => {
     }
     deleteDuplicateBrands();
 
-    const databaseApi = "http://localhost:3001";
-
-    const dataCar = {
+    const carData = {
         brand: selectedBrand,
         model: selectedModel,
         yearOfProduction: selectedYear
@@ -57,7 +55,7 @@ const ClientAddCarForm = () => {
     const addCar = () => {
         fetch(`${databaseApi}/clientCars`, {
             method: "POST",
-            body: JSON.stringify(dataCar),
+            body: JSON.stringify(carData),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -69,46 +67,51 @@ const ClientAddCarForm = () => {
                 throw new Error("Błąd wczytania danych")
             })
             .catch((err) => console.log(err))
+        alert("Dodano prawidłowo")
     }
 
     return (
         <section className="main-add-car">
             <h2 className="main-add-car__title">Fill Car Information</h2>
-            {car ? <form className="form">
+            { car ? <form className="form">
                 <label>Brand:
-                    <select onChange={e => setSelectedBrand(e.target.value)}>
+                    <select onChange={e => { setSelectedBrand(e.target.value) }}>
                         <option>...</option>
                         {brand ? allBrands.map((el, id) => {
                             return (
                                 <option key={id}>{ el }</option>
                             )
-                        }) : null}
+                        }) : null }
                     </select>
                 </label>
                 <label>Model:
-                    <select onChange={e => setSelectedModel(e.target.value)}>
+                    <select onChange={e => { setSelectedModel(e.target.value) }}>
                         <option>...</option>
-                        {car ? car.map((el, id) => {
+                        { car ? car.map((el, id) => {
                             if(el.make === selectedBrand) {
                                 return (
                                     <option key={id}>{ el.model }</option>
                                 )
                             }
                             return null;
-                        }) : null}
+                        }) : null }
                     </select>
                 </label>
                 <label>Year:
-                    <select onChange={e => setSelectedYear(e.target.value)}>
-                        {year ? year.map((el, id) => {
+                    <select onChange={e =>{ setSelectedYear(e.target.value) }}>
+                        <option>...</option>
+                        { year ? year.map((el, id) => {
                             return <option key={id}>{ el }</option>
-                        }) : null}
+                        }) : null }
                     </select>
                 </label>
-                <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
-            </form> : <Loader />}
+                { selectedBrand && selectedModel && selectedYear ?
+                    <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
+                    : <button style={{opacity: 0.6, cursor: "not-allowed"}} onClick={e => {e.preventDefault()}}>Add car</button>
+                }
+            </form> : <Loader /> }
         </section>
     )
 }
 
-export default ClientAddCarForm;
+export default ClientAddCar;
