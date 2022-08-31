@@ -1,19 +1,8 @@
 {
   "clientCars": [
-    {
-      "brand": "bmw",
-      "model": "3-series-gran-turismo",
-      "yearOfProduction": "2003",
-      "id": 1
-    }
+
   ],
   "commission": [
-    {
-      "car": "bmw 3-series-gran-turismo 2003",
-      "garage": "Garage nr3",
-      "description": "Cós tam się stało!!",
-      "registration": "Aw8WHsLxWx",
-      "id": 1
-    }
+    
   ]
 }
