@@ -9,9 +9,19 @@
   margin-top: 2rem;
   height: calc(100vh - 10rem);
   overflow: scroll;
+  @include notebook {
+    overflow: visible;
+  }
+
   &--scroll {
     height: 100%;
+    @include notebook {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
+
   &__car {
     width: 12rem;
     height: 8rem;
@@ -24,6 +34,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include notebook {
+      margin-left: 2rem;
+    }
+
     button {
       width: 2rem;
       height: 2rem;

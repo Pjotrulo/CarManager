@@ -10,17 +10,17 @@ import Garage from "./components/garage/Garage";
 
 function App() {
 
-  return (
-    <>
-        <Router>
-            <Routes>
-                <Route path="/" element={<StartPage />} />
-                <Route path="/client" element={<Client />}/>
-                <Route path="/garage" element={<Garage />}/>
-            </Routes>
-        </Router>
-    </>
-  );
+    return (
+        <>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<StartPage/>}/>
+                    <Route path="/client" element={<Client/>}/>
+                    <Route path="/garage" element={<Garage/>}/>
+                </Routes>
+            </Router>
+        </>
+    );
 }
 
 export default App;

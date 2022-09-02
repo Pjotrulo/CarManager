@@ -23,11 +23,12 @@ const ClientManagementPanel = () => {
     return (
         <section className="management">
             <div className="management__nav">
-                <button style={{backgroundColor: `${buttonAddCar.color}`}} onClick={() => {setButtonAddCar(prev => ({
-                    ...prev,
-                    "bool": true,
-                    "color": "#b84210"
-                }));
+                <button style={{backgroundColor: `${buttonAddCar.color}`}} onClick={() => {
+                    setButtonAddCar(prev => ({
+                        ...prev,
+                        "bool": true,
+                        "color": "#b84210"
+                    }));
                     setButtonCheckCar(prev => ({
                         ...prev,
                         "bool": false,
@@ -37,12 +38,15 @@ const ClientManagementPanel = () => {
                         ...prev,
                         "bool": false,
                         "color": ""
-                    }))}}>Add new car</button>
-                <button style={{backgroundColor: `${buttonCheckCar.color}`}} onClick={() => {setButtonCheckCar(prev => ({
-                    ...prev,
-                    "bool": true,
-                    "color": "#b84210"
-                }));
+                    }))
+                }}>Add new car
+                </button>
+                <button style={{backgroundColor: `${buttonCheckCar.color}`}} onClick={() => {
+                    setButtonCheckCar(prev => ({
+                        ...prev,
+                        "bool": true,
+                        "color": "#b84210"
+                    }));
                     setButtonAddCar(prev => ({
                         ...prev,
                         "bool": false,
@@ -52,12 +56,15 @@ const ClientManagementPanel = () => {
                         ...prev,
                         "bool": false,
                         "color": ""
-                    }))}}>Check car</button>
-                <button style={{backgroundColor: `${buttonRepairCar.color}`}} onClick={() => {setButtonRepairCar(prev => ({
-                    ...prev,
-                    "bool": true,
-                    "color": "#b84210"
-                }));
+                    }))
+                }}>Check car
+                </button>
+                <button style={{backgroundColor: `${buttonRepairCar.color}`}} onClick={() => {
+                    setButtonRepairCar(prev => ({
+                        ...prev,
+                        "bool": true,
+                        "color": "#b84210"
+                    }));
                     setButtonAddCar(prev => ({
                         ...prev,
                         "bool": false,
@@ -67,11 +74,13 @@ const ClientManagementPanel = () => {
                         ...prev,
                         "bool": false,
                         "color": ""
-                    }))}}>Repair car</button>
+                    }))
+                }}>Repair car
+                </button>
             </div>
-            { buttonAddCar.bool ? <ClientAddCar databaseApi={databaseApi} /> : null }
-            { buttonCheckCar.bool ? <ClientCheckCar databaseApi={databaseApi} /> : null }
-            { buttonRepairCar.bool ? <ClientRepairCar databaseApi={databaseApi} /> : null }
+            {buttonAddCar.bool ? <ClientAddCar databaseApi={databaseApi}/> : null}
+            {buttonCheckCar.bool ? <ClientCheckCar databaseApi={databaseApi}/> : null}
+            {buttonRepairCar.bool ? <ClientRepairCar databaseApi={databaseApi}/> : null}
         </section>
     )
 }

@@ -6,6 +6,7 @@
   height: 64px;
   position: relative;
   animation: rotate 1.5s ease-in infinite alternate;
+
   &::before {
     content: '';
     position: absolute;
@@ -17,6 +18,7 @@
     height: 32px;
     border-radius: 0 0 50px 50px;
   }
+
   &::after {
     content: '';
     position: absolute;
@@ -27,7 +29,10 @@
     height: 64px;
     animation: rotate 1.2s linear infinite alternate-reverse;
   }
+
   @keyframes rotate {
-    100% { transform: rotate(360deg)}
+    100% {
+      transform: rotate(360deg)
+    }
   }
 }

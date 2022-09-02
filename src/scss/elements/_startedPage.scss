@@ -14,11 +14,13 @@
   @include notebook {
     background-image: $backgroundNotebook;
   }
+
   &__title {
     color: $colorWhite;
     font-size: 3rem;
     font-family: $fontLogo;
   }
+
   &__btn {
     display: flex;
     justify-content: center;
@@ -27,18 +29,21 @@
     @include tablet {
       flex-direction: row;
     }
+
     button {
       margin-bottom: 2rem;
       background-color: rgba(214, 104, 25, 0.8);
       @include notebook {
         background-color: rgba(214, 104, 25, 0.5);
       }
+
       &:hover {
         background-color: $primaryContainer;
-        box-shadow: 0 0.5rem 2rem 0 rgba(0, 0 ,0, 0.16);
+        box-shadow: 0 0.5rem 2rem 0 rgba(0, 0, 0, 0.16);
         transition: 0.2s;
         opacity: 1;
       }
+
       @include tablet {
         margin-left: 1rem;
         margin-right: 1rem;

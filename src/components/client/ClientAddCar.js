@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loader from "../Loader";
 
-const ClientAddCar = ({ databaseApi }) => {
+const ClientAddCar = ({databaseApi}) => {
 
     const [car, setCar] = useState(null);
     const [brand, setBrand] = useState([]);
@@ -15,7 +15,7 @@ const ClientAddCar = ({ databaseApi }) => {
     useEffect(() => {
         fetch(api)
             .then((res) => {
-                if(res.ok) {
+                if (res.ok) {
                     return res.json();
                 }
                 throw new Error("Błąd wczytywania danych")
@@ -28,11 +28,11 @@ const ClientAddCar = ({ databaseApi }) => {
             })
             .catch((err) => console.log(err))
 
-            const years = [];
-            for(let i = 1950; i <= 2022; i++) {
-                years.push(i);
-            }
-            setYear(years);
+        const years = [];
+        for (let i = 1950; i <= 2022; i++) {
+            years.push(i);
+        }
+        setYear(years);
 
     }, [])
 
@@ -61,7 +61,7 @@ const ClientAddCar = ({ databaseApi }) => {
             }
         })
             .then((res) => {
-                if(res.ok) {
+                if (res.ok) {
                     return res.json();
                 }
                 throw new Error("Błąd wczytania danych")
@@ -73,43 +73,54 @@ const ClientAddCar = ({ databaseApi }) => {
     return (
         <section className="main-add-car">
             <h2 className="main-add-car__title">Fill Car Information</h2>
-            { car ? <form className="form">
+            {car ? <form className="form">
                 <label>Brand:
-                    <select onChange={e => { setSelectedBrand(e.target.value) }}>
-                        <option>...</option>
+                    <select onChange={e => {
+                        setSelectedBrand(e.target.value)
+                    }}>
+                        <option disabled>...</option>
                         {brand ? allBrands.map((el, id) => {
                             return (
-                                <option key={id}>{ el }</option>
+                                <option key={id}>{el}</option>
                             )
-                        }) : null }
+                        }) : null}
                     </select>
                 </label>
                 <label>Model:
-                    <select onChange={e => { setSelectedModel(e.target.value) }}>
-                        <option>...</option>
-                        { car ? car.map((el, id) => {
-                            if(el.make === selectedBrand) {
+                    <select onChange={e => {
+                        setSelectedModel(e.target.value)
+                    }}>
+                        <option disabled>...</option>
+                        {car ? car.map((el, id) => {
+                            if (el.make === selectedBrand) {
                                 return (
-                                    <option key={id}>{ el.model }</option>
+                                    <option key={id}>{el.model}</option>
                                 )
                             }
                             return null;
-                        }) : null }
+                        }) : null}
                     </select>
                 </label>
                 <label>Year:
-                    <select onChange={e =>{ setSelectedYear(e.target.value) }}>
-                        <option>...</option>
-                        { year ? year.map((el, id) => {
-                            return <option key={id}>{ el }</option>
-                        }) : null }
+                    <select onChange={e => {
+                        setSelectedYear(e.target.value)
+                    }}>
+                        <option disabled>...</option>
+                        {year ? year.map((el, id) => {
+                            return <option key={id}>{el}</option>
+                        }) : null}
                     </select>
                 </label>
-                { selectedBrand && selectedModel && selectedYear ?
-                    <button type="submit" onClick={(e) => {e.preventDefault(); addCar(); }}>Add car</button>
-                    : <button style={{opacity: 0.6, cursor: "not-allowed"}} onClick={e => {e.preventDefault()}}>Add car</button>
+                {selectedBrand && selectedModel && selectedYear ?
+                    <button type="submit" onClick={(e) => {
+                        e.preventDefault();
+                        addCar();
+                    }}>Add car</button>
+                    : <button style={{opacity: 0.6, cursor: "not-allowed"}} onClick={e => {
+                        e.preventDefault()
+                    }}>Add car</button>
                 }
-            </form> : <Loader /> }
+            </form> : <Loader/>}
         </section>
     )
 }

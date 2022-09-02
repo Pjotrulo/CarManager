@@ -7,7 +7,7 @@ const Client = () => {
     return (
         <>
             <Header/>
-            <ClientManagementPanel />
+            <ClientManagementPanel/>
         </>
     )
 }
