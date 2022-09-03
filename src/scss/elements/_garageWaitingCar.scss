@@ -1,0 +1,28 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+.garage-waiting-cars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 10rem);
+  overflow: scroll;
+  &__car {
+    @include boxCar {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    };
+    &:first-child {
+      margin-top: 2rem;
+    }
+    button {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: green;
+    }
+  }
+  &--scroll {
+    height: 100%;
+  }
+}

@@ -1,0 +1,49 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+.garage-new-cars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 10rem);
+  overflow: scroll;
+  &--scroll {
+    height: 100%;
+  }
+  &__car {
+    @include boxCar {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    };
+    &:first-child {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.about-car {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    &:first-child {
+      background-color: green;
+    }
+    &:last-child {
+      background-color: red;
+    }
+  }
+}

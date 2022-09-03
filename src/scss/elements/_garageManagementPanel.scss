@@ -1,0 +1,19 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+.garage-management {
+  &__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //flex-direction: column;
+    button {
+      margin-top: 1rem;
+      margin-left: 1rem;
+
+      &:last-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

@@ -23,17 +23,7 @@
   }
 
   &__car {
-    width: 12rem;
-    height: 8rem;
-    margin-bottom: 1rem;
-    border-radius: 1rem;
-    text-transform: capitalize;
-    color: $colorWhite;
-    background-color: rgba(28, 37, 52, 0.7);
-    font-family: $font;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include boxCar;
     @include notebook {
       margin-left: 2rem;
     }

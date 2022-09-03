@@ -1,4 +1,30 @@
 {
-  "clientCars": [],
-  "commission": []
+  "clientCars": [
+    {
+      "brand": "alfa-romeo",
+      "model": "4c-spider",
+      "yearOfProduction": "1954",
+      "id": 1
+    }
+  ],
+  "commission": [
+    {
+      "car": "alfa-romeo 4c-spider 1954",
+      "garage": "Garage nr2",
+      "phoneNumber": "+48693984353",
+      "description": "Bla bla bla....",
+      "commission": "EbFBKZLxco",
+      "id": 1,
+      "status": "gotowy"
+    }
+  ],
+  "done": [
+    {
+      "car": "alfa-romeo 4c-spider 1954",
+      "commissionId": null,
+      "description": "dgfdfgrg00000000000000000000000000000",
+      "price": "5000zł",
+      "id": 1
+    }
+  ]
 }
