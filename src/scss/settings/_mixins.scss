@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin tablet {
   @media screen and (min-width: 768px) {
     @content;
@@ -8,4 +10,19 @@
   @media screen and (min-width: 1024px) {
     @content;
   }
+}
+
+@mixin boxCar {
+  width: 12rem;
+  height: 8rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  text-transform: capitalize;
+  color: $colorWhite;
+  background-color: rgba(28, 37, 52, 0.7);
+  font-family: $font;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @content
 }

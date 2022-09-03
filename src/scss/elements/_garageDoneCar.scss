@@ -1,0 +1,10 @@
+@import "../settings/variables";
+@import "../settings/mixins";
+
+.garage-done-cars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  .form {}
+}
