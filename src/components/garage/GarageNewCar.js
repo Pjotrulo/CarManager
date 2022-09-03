@@ -41,7 +41,6 @@ const GarageNewCar = ({databaseApi}) => {
     const rejectCommission = (id) => {
         const areYouSure = window.confirm("Are you sure?");
         if (areYouSure) {
-            // setReloadCheckCar(id)
             fetch(`${databaseApi}/commission/${id}`, {
                 method: "DELETE",
             })
