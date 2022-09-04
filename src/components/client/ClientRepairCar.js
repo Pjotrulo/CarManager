@@ -16,7 +16,7 @@ const ClientRepairCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytywania danych")
+                throw new Error("Couldn't get car data")
             })
             .then(data => {
                 setCar(data)
@@ -33,11 +33,12 @@ const ClientRepairCar = ({databaseApi}) => {
     }, [databaseApi]);
 
     const carData = {
-        car: selectedCar,
-        garage: selectedGarage,
-        phoneNumber: phoneNumber,
-        description: description,
-        commission: commissionId
+        "car": selectedCar,
+        "garage": selectedGarage,
+        "phoneNumber": phoneNumber,
+        "description": description,
+        "commission": commissionId,
+        "status": "Waiting"
     }
 
     const assignRegistrationId = () => {
@@ -62,7 +63,7 @@ const ClientRepairCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytania danych")
+                throw new Error("Couldn't get car data")
             })
             .catch((err) => console.log(err))
         alert("Your commission id is:".concat(" ") + commissionId);

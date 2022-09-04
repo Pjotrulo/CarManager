@@ -18,7 +18,7 @@ const ClientAddCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytywania danych")
+                throw new Error("Couldn't get car data")
             })
             .then(data => {
                 setCar(data)
@@ -29,7 +29,7 @@ const ClientAddCar = ({databaseApi}) => {
             .catch((err) => console.log(err))
 
         const years = [];
-        for (let i = 1950; i <= 2022; i++) {
+        for (let i = 2022; i >= 1950; i--) {
             years.push(i);
         }
         setYear(years);
@@ -64,10 +64,10 @@ const ClientAddCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytania danych")
+                throw new Error("Couldn't get car data")
             })
             .catch((err) => console.log(err))
-        alert("Dodano prawidłowo")
+        alert("Added successfully")
     }
 
     return (

@@ -1,20 +1,36 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 
 const ClientCheckCar = ({databaseApi}) => {
 
     const [car, setCar] = useState(null);
     const [reloadCheckCar, setReloadCheckCar] = useState([]);
+    const [carFromCommission, setCarFromCommission] = useState(null);
+    const [commissionId, setCommissionId] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetch(`${databaseApi}/clientCars`)
             .then((res) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytywania danych")
+                throw new Error("Couldn't get car data")
             })
             .then(data => {
                 setCar(data)
+            })
+            .catch((err) => console.log(err))
+    }, [databaseApi])
+
+    useEffect(() => {
+        fetch(`${databaseApi}/commission`)
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error("Couldn't get car data")
+            })
+            .then(data => {
+                setCarFromCommission(data);
             })
             .catch((err) => console.log(err))
     }, [databaseApi, reloadCheckCar])
@@ -30,9 +46,24 @@ const ClientCheckCar = ({databaseApi}) => {
         }
     }
 
+    const searchStatusCar = () => {
+        carFromCommission.map(el => {
+            if (commissionId === el.commission) {
+                alert(`${el.car}`.concat(" ") + "Status:".concat(" ") + `${el.status}`);
+            }
+            return null;
+        })
+    }
+
     return (
         <section className="client-cars">
             <div className="client-cars--scroll">
+                <div className="search-bar">
+                    <input type="text" onChange={e => {
+                        setCommissionId(e.target.value)
+                    }}/>
+                    <button style={{width: "4rem"}} onClick={searchStatusCar}>Search</button>
+                </div>
                 {car ? car.map((el) => {
                     return (
                         <div key={el.id} className="client-cars__car">

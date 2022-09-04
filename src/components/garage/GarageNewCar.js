@@ -10,7 +10,7 @@ const GarageNewCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytywania danych")
+                throw new Error("Couldn't get car data")
             })
             .then(data => {
                 setCar(data)
@@ -19,7 +19,7 @@ const GarageNewCar = ({databaseApi}) => {
     }, [databaseApi]);
 
     const carStatus = {
-        "status": "w trakcie naprawy"
+        "status": "In repair"
     }
 
     const acceptCommission = (id) => {
@@ -52,7 +52,9 @@ const GarageNewCar = ({databaseApi}) => {
         <section className="garage-new-cars">
             <div className="garage-new-cars--scroll">
                 {car ? car.map((el) => {
-                    if (el.status) {
+                    if (el.status === "In repair") {
+                        return null;
+                    } else if (el.status === "Done") {
                         return null;
                     }
                     return (

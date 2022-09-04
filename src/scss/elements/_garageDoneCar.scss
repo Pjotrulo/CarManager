@@ -5,6 +5,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
-  .form {}
+  flex-direction: column;
+  height: calc(100vh - 10rem);
+  margin-top: 2rem;
+  overflow: scroll;
+  &__car {
+    @include boxCar;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    button {
+      width: 3rem;
+      background-color: green;
+    }
+  }
+  &--scroll {
+    height: 100%;
+  }
 }

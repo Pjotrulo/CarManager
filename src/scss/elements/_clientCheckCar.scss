@@ -47,3 +47,17 @@
   flex-direction: column;
   margin-left: 1rem;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  input {
+    width: 9rem;
+    border-radius: 1.2rem;
+  }
+  button {
+    margin-top: 0.5rem;
+  }
+}

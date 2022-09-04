@@ -10,7 +10,7 @@ const GarageWaitingCar = ({databaseApi}) => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("Błąd wczytywania danych")
+                throw new Error("Couldn't get car data")
             })
             .then(data => {
                 setWaitingCar(data);
@@ -19,7 +19,7 @@ const GarageWaitingCar = ({databaseApi}) => {
     }, [databaseApi])
 
     const carDone = {
-        "status": "gotowy"
+        "status": "Done"
     }
 
     const doneCommission = (id) => {
@@ -42,14 +42,17 @@ const GarageWaitingCar = ({databaseApi}) => {
         <section className="garage-waiting-cars">
             <div className="garage-waiting-cars--scroll">
                 {waitingCar ? waitingCar.map(el => {
-                    if (el.status === "w trakcie naprawy") {
+                    if (el.status === "In repair") {
                         return (
                             <div key={el.id} className="garage-waiting-cars__car">
                                 <div className="about-car">
                                     <p>{el.car}</p><p>{el.description}</p><p>{el.phoneNumber}</p>
                                 </div>
-                                <button onClick={e => {e.preventDefault(); doneCommission(el.id)}}>Ok</button>
-                                {/*<div className="buttons"></div>*/}
+                                <button onClick={e => {
+                                    e.preventDefault();
+                                    doneCommission(el.id)
+                                }}>Ok
+                                </button>
                             </div>
                         )
                     }
