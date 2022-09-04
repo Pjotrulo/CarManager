@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import PhoneInput from "react-phone-number-input/input";
 
-const ClientRepairCar = ({databaseApi}) => {
+const ClientRepairCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
     const [selectedCar, setSelectedCar] = useState(null);
@@ -66,7 +66,14 @@ const ClientRepairCar = ({databaseApi}) => {
                 throw new Error("Couldn't get car data")
             })
             .catch((err) => console.log(err))
-        alert("Your commission id is:".concat(" ") + commissionId);
+        Swal.fire({
+            title: "Your commission id is:".concat(" ") + commissionId,
+            height: "10rem",
+            toast: true,
+            buttonsStyling: false,
+            icon: "info",
+            backdrop: `rgba(0, 0, 0, 0.8)`
+        });
     }
 
     return (

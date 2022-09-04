@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import ClientAddCar from "./ClientAddCar";
 import ClientCheckCar from "./ClientCheckCar";
 import ClientRepairCar from "./ClientRepairCar";
+import Swal from "sweetalert2";
 
 const ClientManagementPanel = () => {
 
@@ -78,9 +79,9 @@ const ClientManagementPanel = () => {
                 }}>Repair car
                 </button>
             </div>
-            {buttonAddCar.bool ? <ClientAddCar databaseApi={databaseApi}/> : null}
-            {buttonCheckCar.bool ? <ClientCheckCar databaseApi={databaseApi}/> : null}
-            {buttonRepairCar.bool ? <ClientRepairCar databaseApi={databaseApi}/> : null}
+            {buttonAddCar.bool ? <ClientAddCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonCheckCar.bool ? <ClientCheckCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonRepairCar.bool ? <ClientRepairCar Swal={Swal} databaseApi={databaseApi}/> : null}
         </section>
     )
 }

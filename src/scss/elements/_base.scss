@@ -54,3 +54,24 @@ body {
     height: 5rem;
   }
 }
+
+.swal2-title {
+  font-family: $font;
+  color: white !important;
+}
+
+.swal2-popup {
+  background-color: $backgroundColor !important;
+  width: 18rem !important;
+}
+
+.btn {
+  &--success {
+    background-color: green;
+    margin-bottom: 1rem;
+  }
+
+  &--deny {
+    background-color: red;
+  }
+}

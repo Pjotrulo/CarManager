@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useState} from "react";
 
-const ClientCheckCar = ({databaseApi}) => {
+const ClientCheckCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
     const [reloadCheckCar, setReloadCheckCar] = useState([]);
@@ -36,23 +36,53 @@ const ClientCheckCar = ({databaseApi}) => {
     }, [databaseApi, reloadCheckCar])
 
     const removeCar = (id) => {
-        const areYouSure = window.confirm("Are you sure?");
-        if (areYouSure) {
-            setReloadCheckCar(id)
-            fetch(`${databaseApi}/clientCars/${id}`, {
-                method: "DELETE",
+        Swal.fire({
+            title: "Are you sure?",
+            toast: true,
+            icon: "question",
+            showConfirmButton: true,
+            customClass: {
+                confirmButton: 'btn--success',
+                denyButton: 'btn--deny'
+            },
+            buttonsStyling: false,
+            confirmButtonColor: "green",
+            confirmButtonText: "Yes",
+            showDenyButton: true,
+            backdrop: `rgba(0, 0, 0, 0.8)`
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    setReloadCheckCar(id);
+                    fetch(`${databaseApi}/clientCars/${id}`, {
+                        method: "DELETE"
+                    })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                }
+                return null;
             })
-                .catch((err) => console.log(err))
-        }
     }
+
+    const arrayWithRejectedCars = [];
+    const arrayWithAllCommissionCars = [];
 
     const searchStatusCar = () => {
         carFromCommission.map(el => {
+            arrayWithAllCommissionCars.push(el.id)
             if (commissionId === el.commission) {
-                alert(`${el.car}`.concat(" ") + "Status:".concat(" ") + `${el.status}`);
+                Swal.fire(`${el.car}`.concat(" ") + "Status:".concat(" ") + `${el.status}`);
+            } else if (commissionId !== el.commission) {
+                arrayWithRejectedCars.push(el.id)
             }
             return null;
         })
+        if (arrayWithRejectedCars.length === arrayWithAllCommissionCars.length) {
+            Swal.fire({
+                title: "Your commission was rejected",
+            });
+        }
     }
 
     return (

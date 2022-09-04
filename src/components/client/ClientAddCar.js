@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loader from "../Loader";
 
-const ClientAddCar = ({databaseApi}) => {
+const ClientAddCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
     const [brand, setBrand] = useState([]);
@@ -67,7 +67,15 @@ const ClientAddCar = ({databaseApi}) => {
                 throw new Error("Couldn't get car data")
             })
             .catch((err) => console.log(err))
-        alert("Added successfully")
+        Swal.fire({
+            icon: "success",
+            title: "Added successfully",
+            toast: true,
+            position: 'center',
+            showConfirmButton: true,
+            confirmButtonColor: "green",
+            backdrop: `rgba(0, 0, 0, 0.8)`
+        })
     }
 
     return (

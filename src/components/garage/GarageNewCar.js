@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 
 const GarageNewCar = ({databaseApi}) => {
 
     const [car, setCar] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetch(`${databaseApi}/commission`)
             .then((res) => {
                 if (res.ok) {
