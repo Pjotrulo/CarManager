@@ -1,13 +1,13 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const ClientCheckCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
-    const [reloadCheckCar, setReloadCheckCar] = useState([]);
+    const [reloadCheckCar, setReloadCheckCar] = useState(null);
     const [carFromCommission, setCarFromCommission] = useState(null);
     const [commissionId, setCommissionId] = useState(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         fetch(`${databaseApi}/clientCars`)
             .then((res) => {
                 if (res.ok) {
@@ -19,7 +19,7 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
                 setCar(data)
             })
             .catch((err) => console.log(err))
-    }, [databaseApi])
+    }, [databaseApi, reloadCheckCar])
 
     useEffect(() => {
         fetch(`${databaseApi}/commission`)
@@ -33,12 +33,12 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
                 setCarFromCommission(data);
             })
             .catch((err) => console.log(err))
-    }, [databaseApi, reloadCheckCar])
+    }, [databaseApi])
 
     const removeCar = (id) => {
+        setReloadCheckCar(id);
         Swal.fire({
             title: "Are you sure?",
-            toast: true,
             icon: "question",
             showConfirmButton: true,
             customClass: {
@@ -72,7 +72,11 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
         carFromCommission.map(el => {
             arrayWithAllCommissionCars.push(el.id)
             if (commissionId === el.commission) {
-                Swal.fire(`${el.car}`.concat(" ") + "Status:".concat(" ") + `${el.status}`);
+                Swal.fire({
+                    title: `${el.car}`.toUpperCase(),
+                    text: `Status: ${el.status}`,
+                    backdrop: `rgba(0, 0, 0, 0.8)`
+                });
             } else if (commissionId !== el.commission) {
                 arrayWithRejectedCars.push(el.id)
             }
@@ -81,6 +85,7 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
         if (arrayWithRejectedCars.length === arrayWithAllCommissionCars.length) {
             Swal.fire({
                 title: "Your commission was rejected",
+                backdrop: `rgba(0, 0, 0, 0.8)`
             });
         }
     }

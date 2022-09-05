@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import GarageNewCar from "./GarageNewCar";
 import GarageWaitingCar from "./GarageWaitingCar";
+import GarageInRepairCar from "./GarageInRepairCar";
 import GarageDoneCar from "./GarageDoneCar";
+import Swal from "sweetalert2";
 
 const GarageManagementPanel = () => {
 
@@ -39,7 +40,7 @@ const GarageManagementPanel = () => {
                         "bool": false,
                         "color": ""
                     }));
-                }}>New
+                }}>Waiting
                 </button>
                 <button style={{backgroundColor: `${buttonWaiting.color}`}} onClick={() => {
                     setButtonWaiting(prev => ({
@@ -59,7 +60,7 @@ const GarageManagementPanel = () => {
                         "bool": false,
                         "color": ""
                     }));
-                }}>Waiting
+                }}>In repair
                 </button>
                 <button style={{backgroundColor: `${buttonDone.color}`}} onClick={() => {
                     setButtonDone(prev => ({
@@ -80,9 +81,9 @@ const GarageManagementPanel = () => {
                 }}>Done
                 </button>
             </div>
-            {buttonNew.bool ? <GarageNewCar databaseApi={databaseApi}/> : null}
-            {buttonWaiting.bool ? <GarageWaitingCar databaseApi={databaseApi}/> : null}
-            {buttonDone.bool ? <GarageDoneCar databaseApi={databaseApi}/> : null}
+            {buttonNew.bool ? <GarageWaitingCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonWaiting.bool ? <GarageInRepairCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonDone.bool ? <GarageDoneCar Swal={Swal} databaseApi={databaseApi}/> : null}
         </section>
     )
 }

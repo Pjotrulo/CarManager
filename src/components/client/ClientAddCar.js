@@ -13,6 +13,7 @@ const ClientAddCar = ({databaseApi, Swal}) => {
     const api = "https://private-anon-0c45208108-carsapi1.apiary-mock.com/cars";
 
     useEffect(() => {
+        let mounted = true;
         fetch(api)
             .then((res) => {
                 if (res.ok) {
@@ -21,10 +22,12 @@ const ClientAddCar = ({databaseApi, Swal}) => {
                 throw new Error("Couldn't get car data")
             })
             .then(data => {
-                setCar(data)
-                data.map(el => {
-                    return setBrand(prev => [...prev, el.make])
-                })
+                if(mounted) {
+                    setCar(data)
+                    data.map(el => {
+                        return setBrand(prev => [...prev, el.make])
+                    })
+                }
             })
             .catch((err) => console.log(err))
 
@@ -33,6 +36,10 @@ const ClientAddCar = ({databaseApi, Swal}) => {
             years.push(i);
         }
         setYear(years);
+
+        return () => {
+            mounted = false;
+        }
 
     }, [])
 
@@ -70,11 +77,10 @@ const ClientAddCar = ({databaseApi, Swal}) => {
         Swal.fire({
             icon: "success",
             title: "Added successfully",
-            toast: true,
             position: 'center',
             showConfirmButton: true,
             confirmButtonColor: "green",
-            backdrop: `rgba(0, 0, 0, 0.8)`
+            backdrop: `rgba(0, 0, 0, 0.8)`,
         })
     }
 

@@ -1,5 +1,5 @@
-@import "../settings/variables";
-@import "../settings/mixins";
+@import "../../settings/variables";
+@import "../../settings/mixins";
 
 .garage-new-cars {
   display: flex;
@@ -8,16 +8,37 @@
   flex-direction: column;
   height: calc(100vh - 10rem);
   overflow: scroll;
+  @include notebook {
+    overflow: visible;
+  }
+
   &--scroll {
     height: 100%;
+    @include notebook {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
   }
+
   &__car {
     @include boxCar {
       padding-left: 0.5rem;
       padding-right: 0.5rem;
-    };
+      @include notebook {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    }
+  ;
+
     &:first-child {
       margin-top: 2rem;
+      @include notebook {
+        margin-top: 0;
+      }
     }
   }
 }
@@ -35,13 +56,16 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
+
   button {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
+
     &:first-child {
       background-color: green;
     }
+
     &:last-child {
       background-color: red;
     }

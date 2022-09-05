@@ -1,5 +1,5 @@
-@import "../settings/variables";
-@import "../settings/mixins";
+@import "../../settings/variables";
+@import "../../settings/mixins";
 
 .garage-waiting-cars {
   display: flex;
@@ -8,21 +8,43 @@
   flex-direction: column;
   height: calc(100vh - 10rem);
   overflow: scroll;
+  @include notebook {
+    overflow: visible;
+  }
+
   &__car {
     @include boxCar {
       padding-left: 0.5rem;
       padding-right: 0.5rem;
-    };
+    }
+  ;
+    @include notebook {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
     &:first-child {
       margin-top: 2rem;
+      @include notebook {
+        margin-top: 0;
+      }
     }
+
     button {
       width: 2.5rem;
       height: 2.5rem;
       background-color: green;
     }
   }
+
   &--scroll {
     height: 100%;
+    @include notebook {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
   }
 }

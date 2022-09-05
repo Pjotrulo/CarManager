@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 
-const GarageWaitingCar = ({databaseApi}) => {
+const GarageWaitingCar = ({databaseApi, Swal}) => {
 
-    const [waitingCar, setWaitingCar] = useState(null);
+    const [car, setCar] = useState(null);
+    const [reloadCar, setReloadCar] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetch(`${databaseApi}/commission`)
             .then((res) => {
                 if (res.ok) {
@@ -13,19 +14,20 @@ const GarageWaitingCar = ({databaseApi}) => {
                 throw new Error("Couldn't get car data")
             })
             .then(data => {
-                setWaitingCar(data);
+                setCar(data)
             })
             .catch((err) => console.log(err))
-    }, [databaseApi])
+    }, [databaseApi, reloadCar]);
 
-    const carDone = {
-        "status": "Done"
+    const carStatus = {
+        "status": "In repair"
     }
 
-    const doneCommission = (id) => {
+    const acceptCommission = (id) => {
+        setReloadCar(id);
         fetch(`${databaseApi}/commission/${id}`, {
             method: "PATCH",
-            body: JSON.stringify(carDone),
+            body: JSON.stringify(carStatus),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -36,27 +38,73 @@ const GarageWaitingCar = ({databaseApi}) => {
             .catch(err => {
                 console.log(err);
             })
+        Swal.fire({
+            icon: "success",
+            title: "Commission accepted",
+            position: 'center',
+            showConfirmButton: true,
+            confirmButtonColor: "green",
+            backdrop: `rgba(0, 0, 0, 0.8)`,
+        })
+    }
+
+    const rejectCommission = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "question",
+            showConfirmButton: true,
+            customClass: {
+                confirmButton: 'btn--success',
+                denyButton: 'btn--deny'
+            },
+            buttonsStyling: false,
+            confirmButtonColor: "green",
+            confirmButtonText: "Yes",
+            showDenyButton: true,
+            backdrop: `rgba(0, 0, 0, 0.8)`
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+                    // setReloadCheckCar(id);
+                    fetch(`${databaseApi}/commission/${id}`, {
+                        method: "DELETE"
+                    })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                }
+                return null;
+            })
     }
 
     return (
-        <section className="garage-waiting-cars">
-            <div className="garage-waiting-cars--scroll">
-                {waitingCar ? waitingCar.map(el => {
+        <section className="garage-new-cars">
+            <div className="garage-new-cars--scroll">
+                {car ? car.map((el) => {
                     if (el.status === "In repair") {
-                        return (
-                            <div key={el.id} className="garage-waiting-cars__car">
-                                <div className="about-car">
-                                    <p>{el.car}</p><p>{el.description}</p><p>{el.phoneNumber}</p>
-                                </div>
+                        return null;
+                    } else if (el.status === "Done") {
+                        return null;
+                    }
+                    return (
+                        <div className="garage-new-cars__car">
+                            <div className="about-car">
+                                <p>{el.car}</p><p>{el.description}</p><p>{el.phoneNumber}</p>
+                            </div>
+                            <div className="buttons">
                                 <button onClick={e => {
                                     e.preventDefault();
-                                    doneCommission(el.id)
+                                    acceptCommission(el.id)
                                 }}>Ok
                                 </button>
+                                <button onClick={e => {
+                                    e.preventDefault();
+                                    rejectCommission(el.id)
+                                }}>X
+                                </button>
                             </div>
-                        )
-                    }
-                    return null;
+                        </div>
+                    )
                 }) : null}
             </div>
         </section>

@@ -1,5 +1,5 @@
-@import "../settings/variables";
-@import "../settings/mixins";
+@import "../../settings/variables";
+@import "../../settings/mixins";
 
 .garage-done-cars {
   display: flex;
@@ -9,16 +9,33 @@
   height: calc(100vh - 10rem);
   margin-top: 2rem;
   overflow: scroll;
+  @include notebook {
+    overflow: visible;
+  }
+
   &__car {
     @include boxCar;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    @include notebook {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
     button {
       width: 3rem;
       background-color: green;
     }
   }
+
   &--scroll {
     height: 100%;
+    @include notebook {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
   }
 }

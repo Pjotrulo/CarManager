@@ -5,8 +5,8 @@ import GarageManagementPanel from "./GarageManagementPanel";
 const Garage = () => {
     return (
         <>
-            <Header />
-            <GarageManagementPanel />
+            <Header/>
+            <GarageManagementPanel/>
         </>
     )
 }

@@ -69,7 +69,6 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
         Swal.fire({
             title: "Your commission id is:".concat(" ") + commissionId,
             height: "10rem",
-            toast: true,
             buttonsStyling: false,
             icon: "info",
             backdrop: `rgba(0, 0, 0, 0.8)`
