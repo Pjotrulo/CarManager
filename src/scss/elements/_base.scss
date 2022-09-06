@@ -4,6 +4,7 @@
 body {
   background-image: $backgroundMobile;
   background-size: cover;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
@@ -42,6 +43,9 @@ body {
     opacity: 0.9;
     color: $colorWhite;
     text-transform: uppercase;
+    @include notebook {
+      cursor: pointer;
+    }
   }
 
   button {

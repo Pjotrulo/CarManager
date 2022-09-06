@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 const GarageDoneCar = ({databaseApi, Swal}) => {
 
     const [doneCar, setDoneCar] = useState(null);
-    const [reloadCar, setReloadCar] = useState(null);
 
     useEffect(() => {
         fetch(`${databaseApi}/commission`)
@@ -17,10 +16,9 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                 setDoneCar(data);
             })
             .catch((err) => console.log(err))
-    }, [databaseApi, reloadCar])
+    }, [databaseApi])
 
     const finalizeCommission = (id) => {
-        setReloadCar(id);
         Swal.fire({
             title: "Are you sure?",
             icon: "question",
@@ -43,6 +41,20 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                         .catch((err) => {
                             console.log(err)
                         })
+                    Swal.fire({
+                        title: "Commission is done"
+                    })
+                    fetch(`${databaseApi}/commission`)
+                        .then((res) => {
+                            if (res.ok) {
+                                return res.json();
+                            }
+                            throw new Error("Couldn't get car data")
+                        })
+                        .then(data => {
+                            setDoneCar(data);
+                        })
+                        .catch((err) => console.log(err))
                 }
                 return null;
             })
@@ -54,7 +66,7 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                 {doneCar ? doneCar.map(el => {
                     if (el.status === "Done") {
                         return (
-                            <div className="garage-done-cars__car">
+                            <div key={el.id} className="garage-done-cars__car">
                                 <div className="about-car"><p>{el.car}</p> <p>{el.description}</p>
                                     <p>{el.phoneNumber}</p></div>
                                 <button onClick={e => {

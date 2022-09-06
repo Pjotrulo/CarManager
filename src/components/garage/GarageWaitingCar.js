@@ -1,11 +1,10 @@
-import React, {useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const GarageWaitingCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
-    const [reloadCar, setReloadCar] = useState(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         fetch(`${databaseApi}/commission`)
             .then((res) => {
                 if (res.ok) {
@@ -17,14 +16,13 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
                 setCar(data)
             })
             .catch((err) => console.log(err))
-    }, [databaseApi, reloadCar]);
+    }, [databaseApi]);
 
     const carStatus = {
         "status": "In repair"
     }
 
     const acceptCommission = (id) => {
-        setReloadCar(id);
         fetch(`${databaseApi}/commission/${id}`, {
             method: "PATCH",
             body: JSON.stringify(carStatus),
@@ -46,6 +44,21 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
             confirmButtonColor: "green",
             backdrop: `rgba(0, 0, 0, 0.8)`,
         })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`${databaseApi}/commission`)
+                        .then((res) => {
+                            if (res.ok) {
+                                return res.json();
+                            }
+                            throw new Error("Couldn't get car data")
+                        })
+                        .then(data => {
+                            setCar(data)
+                        })
+                        .catch((err) => console.log(err))
+                }
+            })
     }
 
     const rejectCommission = (id) => {
@@ -65,12 +78,31 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
         })
             .then(result => {
                 if (result.isConfirmed) {
-                    // setReloadCheckCar(id);
                     fetch(`${databaseApi}/commission/${id}`, {
                         method: "DELETE"
                     })
                         .catch((err) => {
                             console.log(err)
+                        })
+                    Swal.fire({
+                        icon: "success",
+                        title: "Deleted commission is successfully",
+                        position: "center",
+                        confirmButtonColor: "green",
+                        backdrop: `rgba(0, 0, 0, 0.8)`,
+                    })
+                        .then(() => {
+                            fetch(`${databaseApi}/commission`)
+                                .then((res) => {
+                                    if (res.ok) {
+                                        return res.json();
+                                    }
+                                    throw new Error("Couldn't get car data")
+                                })
+                                .then(data => {
+                                    setCar(data)
+                                })
+                                .catch((err) => console.log(err))
                         })
                 }
                 return null;
@@ -87,7 +119,7 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
                         return null;
                     }
                     return (
-                        <div className="garage-new-cars__car">
+                        <div key={el.id} className="garage-new-cars__car">
                             <div className="about-car">
                                 <p>{el.car}</p><p>{el.description}</p><p>{el.phoneNumber}</p>
                             </div>

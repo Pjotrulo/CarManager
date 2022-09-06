@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 const ClientCheckCar = ({databaseApi, Swal}) => {
 
     const [car, setCar] = useState(null);
-    const [reloadCheckCar, setReloadCheckCar] = useState(null);
     const [carFromCommission, setCarFromCommission] = useState(null);
     const [commissionId, setCommissionId] = useState(null);
 
@@ -19,7 +18,7 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
                 setCar(data)
             })
             .catch((err) => console.log(err))
-    }, [databaseApi, reloadCheckCar])
+    }, [databaseApi])
 
     useEffect(() => {
         fetch(`${databaseApi}/commission`)
@@ -36,7 +35,6 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
     }, [databaseApi])
 
     const removeCar = (id) => {
-        setReloadCheckCar(id);
         Swal.fire({
             title: "Are you sure?",
             icon: "question",
@@ -53,12 +51,31 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
         })
             .then(result => {
                 if (result.isConfirmed) {
-                    setReloadCheckCar(id);
                     fetch(`${databaseApi}/clientCars/${id}`, {
                         method: "DELETE"
                     })
                         .catch((err) => {
                             console.log(err)
+                        })
+                    Swal.fire({
+                        icon: "success",
+                        title: "Deleted successfully",
+                        position: "center",
+                        confirmButtonColor: "green",
+                        backdrop: `rgba(0, 0, 0, 0.8)`,
+                    })
+                        .then(() => {
+                            fetch(`${databaseApi}/clientCars`)
+                                .then((res) => {
+                                    if (res.ok) {
+                                        return res.json();
+                                    }
+                                    throw new Error("Couldn't get car data")
+                                })
+                                .then(data => {
+                                    setCar(data)
+                                })
+                                .catch((err) => console.log(err))
                         })
                 }
                 return null;

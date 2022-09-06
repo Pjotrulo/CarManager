@@ -41,6 +41,10 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
         "status": "Waiting"
     }
 
+    const carCommissionId = {
+        "commission": commissionId
+    }
+
     const assignRegistrationId = () => {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -66,9 +70,22 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
                 throw new Error("Couldn't get car data")
             })
             .catch((err) => console.log(err))
+        fetch(`${databaseApi}/commissionId`, {
+            method: "POST",
+            body: JSON.stringify(carCommissionId),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error("Couldn't get car data")
+            })
+            .catch((err) => console.log(err))
         Swal.fire({
             title: "Your commission id is:".concat(" ") + commissionId,
-            height: "10rem",
             buttonsStyling: false,
             icon: "info",
             backdrop: `rgba(0, 0, 0, 0.8)`
