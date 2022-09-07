@@ -6,11 +6,11 @@ import Swal from "sweetalert2";
 
 const GarageManagementPanel = () => {
 
-    const [buttonNew, setButtonNew] = useState({
-        "bool": false,
-        "color": ""
-    });
     const [buttonWaiting, setButtonWaiting] = useState({
+        "bool": true,
+        "color": "#b84210"
+    });
+    const [buttonInRepair, setButtonInRepair] = useState({
         "bool": false,
         "color": ""
     });
@@ -24,13 +24,13 @@ const GarageManagementPanel = () => {
     return (
         <section className="garage-management">
             <div className="garage-management__nav">
-                <button style={{backgroundColor: `${buttonNew.color}`}} onClick={() => {
-                    setButtonNew(prev => ({
+                <button style={{backgroundColor: `${buttonWaiting.color}`}} onClick={() => {
+                    setButtonWaiting(prev => ({
                         ...prev,
                         "bool": true,
                         "color": "#b84210"
                     }));
-                    setButtonWaiting(prev => ({
+                    setButtonInRepair(prev => ({
                         ...prev,
                         "bool": false,
                         "color": ""
@@ -42,14 +42,14 @@ const GarageManagementPanel = () => {
                     }));
                 }}>Waiting
                 </button>
-                <button style={{backgroundColor: `${buttonWaiting.color}`}} onClick={() => {
-                    setButtonWaiting(prev => ({
+                <button style={{backgroundColor: `${buttonInRepair.color}`}} onClick={() => {
+                    setButtonInRepair(prev => ({
                         ...prev,
                         "bool": true,
                         "color": "#b84210"
                     }));
 
-                    setButtonNew(prev => ({
+                    setButtonWaiting(prev => ({
                         ...prev,
                         "bool": false,
                         "color": ""
@@ -68,12 +68,12 @@ const GarageManagementPanel = () => {
                         "bool": true,
                         "color": "#b84210"
                     }));
-                    setButtonNew(prev => ({
+                    setButtonWaiting(prev => ({
                         ...prev,
                         "bool": false,
                         "color": ""
                     }));
-                    setButtonWaiting(prev => ({
+                    setButtonInRepair(prev => ({
                         ...prev,
                         "bool": false,
                         "color": ""
@@ -81,8 +81,8 @@ const GarageManagementPanel = () => {
                 }}>Done
                 </button>
             </div>
-            {buttonNew.bool ? <GarageWaitingCar Swal={Swal} databaseApi={databaseApi}/> : null}
-            {buttonWaiting.bool ? <GarageInRepairCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonWaiting.bool ? <GarageWaitingCar Swal={Swal} databaseApi={databaseApi}/> : null}
+            {buttonInRepair.bool ? <GarageInRepairCar Swal={Swal} databaseApi={databaseApi}/> : null}
             {buttonDone.bool ? <GarageDoneCar Swal={Swal} databaseApi={databaseApi}/> : null}
         </section>
     )

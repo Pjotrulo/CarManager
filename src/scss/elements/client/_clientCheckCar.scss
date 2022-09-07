@@ -64,10 +64,12 @@
   }
 
   input {
-    background-color: $backgroundColor;
-    opacity: 0.8;
+    background-color: $secondaryContainer;
     border: none;
+    font-family: $font;
+    font-size: 0.8rem;
     color: $colorWhite;
+    text-align: center;
     width: 9rem;
     border-radius: 1.2rem;
     @include notebook {
@@ -78,6 +80,7 @@
   }
 
   button {
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
   }
 }

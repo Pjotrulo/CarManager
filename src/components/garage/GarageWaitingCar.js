@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {FaTimes, FaCheck} from "react-icons/fa";
 
 const GarageWaitingCar = ({databaseApi, Swal}) => {
 
@@ -127,12 +128,12 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
                                 <button onClick={e => {
                                     e.preventDefault();
                                     acceptCommission(el.id)
-                                }}>Ok
+                                }}><FaCheck/>
                                 </button>
                                 <button onClick={e => {
                                     e.preventDefault();
                                     rejectCommission(el.id)
-                                }}>X
+                                }}><FaTimes/>
                                 </button>
                             </div>
                         </div>

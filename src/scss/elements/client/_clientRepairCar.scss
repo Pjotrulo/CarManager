@@ -12,6 +12,42 @@
     textarea {
       resize: none;
       width: 9rem;
+      background-color: $secondaryContainer;
+      border-radius: 0.5rem;
+      border: none;
+      color: $colorWhite;
+      font-size: 0.8rem;
+      font-family: $font;
+
+      &::placeholder {
+        color: $colorWhite;
+        opacity: 0.7;
+        text-align: center;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.react-tel-input {
+  .special-label {
+    display: none;
+  }
+
+  .form-control {
+    background-color: $secondaryContainer;
+    opacity: 0.9;
+    font-family: $font;
+    border: none;
+    border-radius: 0.5rem;
+    color: $colorWhite;
+
+    &::placeholder {
+      color: white;
+      opacity: 0.7;
+      text-align: center;
+      font-family: $font;
+      font-size: 0.9rem;
     }
   }
 }

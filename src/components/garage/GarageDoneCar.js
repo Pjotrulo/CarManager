@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {FaCheck} from "react-icons/fa";
 
 const GarageDoneCar = ({databaseApi, Swal}) => {
 
@@ -44,17 +45,21 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                     Swal.fire({
                         title: "Commission is done"
                     })
-                    fetch(`${databaseApi}/commission`)
-                        .then((res) => {
-                            if (res.ok) {
-                                return res.json();
+                        .then(result => {
+                            if (result.isConfirmed) {
+                                fetch(`${databaseApi}/commission`)
+                                    .then((res) => {
+                                        if (res.ok) {
+                                            return res.json();
+                                        }
+                                        throw new Error("Couldn't get car data")
+                                    })
+                                    .then(data => {
+                                        setDoneCar(data);
+                                    })
+                                    .catch((err) => console.log(err))
                             }
-                            throw new Error("Couldn't get car data")
                         })
-                        .then(data => {
-                            setDoneCar(data);
-                        })
-                        .catch((err) => console.log(err))
                 }
                 return null;
             })
@@ -72,7 +77,7 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                                 <button onClick={e => {
                                     e.preventDefault();
                                     finalizeCommission(el.id)
-                                }}>Done
+                                }}><FaCheck/>
                                 </button>
                             </div>
                         )

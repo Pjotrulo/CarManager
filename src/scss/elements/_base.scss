@@ -37,10 +37,15 @@ body {
 
   select {
     width: 10rem;
+    height: 1.5rem;
     margin-top: 1.5rem;
     border-radius: 0.5rem;
     background-color: $secondaryContainer;
+    border: none;
     opacity: 0.9;
+    font-family: $font;
+    text-align: center;
+    font-size: 0.8rem;
     color: $colorWhite;
     text-transform: uppercase;
     @include notebook {

@@ -58,16 +58,29 @@
   height: 100%;
 
   button {
-    width: 2rem;
-    height: 2rem;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:first-child {
-      background-color: green;
+      background-color: transparent;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        color: green;
+      }
     }
 
     &:last-child {
-      background-color: red;
+      background-color: transparent;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        color: red;
+      }
     }
   }
 }

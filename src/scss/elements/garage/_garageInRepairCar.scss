@@ -15,7 +15,6 @@
   &__car {
     @include boxCar {
       padding-left: 0.5rem;
-      padding-right: 0.5rem;
     }
   ;
     @include notebook {
@@ -31,9 +30,14 @@
     }
 
     button {
-      width: 2.5rem;
-      height: 2.5rem;
-      background-color: green;
+      width: 3rem;
+      background-color: transparent;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        color: green;
+      }
     }
   }
 

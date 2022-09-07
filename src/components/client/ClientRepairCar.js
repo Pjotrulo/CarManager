@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import PhoneInput from "react-phone-number-input/input";
+import ReactPhoneInput from "react-phone-input-2";
 
 const ClientRepairCar = ({databaseApi, Swal}) => {
 
@@ -41,10 +41,6 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
         "status": "Waiting"
     }
 
-    const carCommissionId = {
-        "commission": commissionId
-    }
-
     const assignRegistrationId = () => {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -59,20 +55,6 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
         fetch(`${databaseApi}/commission`, {
             method: "POST",
             body: JSON.stringify(carData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error("Couldn't get car data")
-            })
-            .catch((err) => console.log(err))
-        fetch(`${databaseApi}/commissionId`, {
-            method: "POST",
-            body: JSON.stringify(carCommissionId),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -114,7 +96,7 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
                     <option>Garage nr3</option>
                 </select>
                 <label>
-                    <PhoneInput placeholder="Phone number" value={phoneNumber} onChange={setPhoneNumber}/>
+                    <ReactPhoneInput placeholder="Phone number" value={phoneNumber} onChange={setPhoneNumber}/>
                 </label>
                 <textarea
                     maxLength={50}
@@ -125,7 +107,7 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
                     }}>
                 </textarea>
                 {
-                    selectedCar && selectedGarage && phoneNumber.length >= 11 && description.length > 10 ?
+                    selectedCar && selectedGarage && phoneNumber.length >= 8 && description.length > 10 ?
                         <button type="submit" onClick={e => {
                             e.preventDefault();
                             assignRegistrationId();
