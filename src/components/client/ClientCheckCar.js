@@ -111,7 +111,7 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
         <section className="client-cars">
             <div className="client-cars--scroll">
                 <div className="search-bar">
-                    <input type="text" onChange={e => {
+                    <input type="text" placeholder="Car id" onChange={e => {
                         setCommissionId(e.target.value)
                     }}/>
                     <button style={{width: "4rem"}} onClick={searchStatusCar}>Search</button>
