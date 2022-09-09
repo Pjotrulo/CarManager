@@ -35,7 +35,7 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
     const carData = {
         "car": selectedCar,
         "garage": selectedGarage,
-        "phoneNumber": phoneNumber,
+        "phoneNumber": "+" + phoneNumber,
         "description": description,
         "commission": commissionId,
         "status": "Waiting"

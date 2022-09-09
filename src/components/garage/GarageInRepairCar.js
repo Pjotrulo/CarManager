@@ -47,6 +47,21 @@ const GarageInRepairCar = ({databaseApi, Swal}) => {
             confirmButtonColor: "green",
             backdrop: `rgba(0, 0, 0, 0.8)`,
         })
+            .then(result => {
+                if (result.isConfirmed) {
+                    fetch(`${databaseApi}/commission`)
+                        .then((res) => {
+                            if (res.ok) {
+                                return res.json();
+                            }
+                            throw new Error("Couldn't get car data")
+                        })
+                        .then(data => {
+                            setWaitingCar(data);
+                        })
+                        .catch((err) => console.log(err))
+                }
+            })
     }
 
     return (

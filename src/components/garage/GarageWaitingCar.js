@@ -87,7 +87,7 @@ const GarageWaitingCar = ({databaseApi, Swal}) => {
                         })
                     Swal.fire({
                         icon: "success",
-                        title: "Deleted commission is successfully",
+                        title: "Commission rejected",
                         position: "center",
                         confirmButtonColor: "green",
                         backdrop: `rgba(0, 0, 0, 0.8)`,
