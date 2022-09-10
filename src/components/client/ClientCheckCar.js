@@ -114,7 +114,7 @@ const ClientCheckCar = ({databaseApi, Swal}) => {
                     <input type="text" placeholder="Car id" onChange={e => {
                         setCommissionId(e.target.value)
                     }}/>
-                    <button onClick={searchStatusCar}>Search</button>
+                    <button style={{width: "4rem"}} onClick={searchStatusCar}>Search</button>
                 </div>
                 {car ? car.map((el) => {
                     return (
