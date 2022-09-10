@@ -14,7 +14,7 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route path="/home" element={<StartPage/>}/>
+                    <Route path="/started" element={<StartPage/>}/>
                     <Route path="/client" element={<Client/>}/>
                     <Route path="/garage" element={<Garage/>}/>
                 </Routes>
