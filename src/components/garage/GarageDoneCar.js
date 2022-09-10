@@ -43,7 +43,8 @@ const GarageDoneCar = ({databaseApi, Swal}) => {
                             console.log(err)
                         })
                     Swal.fire({
-                        title: "Commission is done"
+                        title: "Commission is done",
+                        backdrop: `rgba(0, 0, 0, 0.8)`
                     })
                         .then(result => {
                             if (result.isConfirmed) {
