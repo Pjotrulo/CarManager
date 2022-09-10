@@ -1,7 +1,7 @@
 {
   "name": "projekt_koncowy",
   "version": "0.1.0",
-  "homepage": "https://pjotrulo.github.io/CarManager/",
+  "homepage": "https://pjotrulo.github.io/CarManager/home",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
