@@ -1,7 +1,6 @@
 {
   "name": "projekt_koncowy",
   "version": "0.1.0",
-  "homepage": "https://pjotrulo.github.io/CarManager/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,9 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build json-server ./src/database/db.json -c json-server.json",
-    "start": "react-scripts start",
+    "start": "react-scripts start && json-server ./src/database/db.json -c json-server.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
   }
 }
