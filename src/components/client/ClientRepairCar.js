@@ -107,7 +107,7 @@ const ClientRepairCar = ({databaseApi, Swal}) => {
                     }}>
                 </textarea>
                 {
-                    selectedCar && selectedGarage && phoneNumber.length >= 8 && description.length > 10 ?
+                    selectedCar && selectedGarage && phoneNumber.length >= 8 ?
                         <button type="submit" onClick={e => {
                             e.preventDefault();
                             assignRegistrationId();

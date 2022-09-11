@@ -22,7 +22,7 @@ const ClientAddCar = ({databaseApi, Swal}) => {
                 throw new Error("Couldn't get car data")
             })
             .then(data => {
-                if(mounted) {
+                if (mounted) {
                     setCar(data)
                     data.map(el => {
                         return setBrand(prev => [...prev, el.make])
