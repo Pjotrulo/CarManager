@@ -8,6 +8,7 @@ that enables the client to report a car malfunction to a chosen garage. The gara
 - React
 - Sass
 - Json Server
+- REST API
 
 ## Libraries used: 
 
