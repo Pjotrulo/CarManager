@@ -28,3 +28,14 @@ npm start
 ```
 json-server ./src/database/db.json -c json-server.json
 ```
+
+## ScreenShots:
+![ClientAddCar](./src/assets/ScreenShots/ClientAddCar.png)
+![ClientCheckCar](./src/assets/ScreenShots/ClientCheckCar.png)
+![ClientRepairCar](./src/assets/ScreenShots/ClientRepairCar.png)
+![GarageWaiting](./src/assets/ScreenShots/GarageWaiting.png)
+![GarageInRepair](./src/assets/ScreenShots/GarageInRepair.png)
+![GarageDone](./src/assets/ScreenShots/GarageDone.png)
+![PopupAdded](./src/assets/ScreenShots/PopupAdded.png)
+![PopupDone](./src/assets/ScreenShots/PopupCommissionDone.png)
+![PopupId](./src/assets/ScreenShots/PopupCommissionId.png)
