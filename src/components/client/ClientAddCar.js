@@ -10,7 +10,7 @@ const ClientAddCar = ({databaseApi, Swal}) => {
     const [year, setYear] = useState([]);
     const [selectedYear, setSelectedYear] = useState("");
 
-    const api = "https://private-anon-0c45208108-carsapi1.apiary-mock.com/cars";
+    const api = "https://private-anon-0957ac1d28-carsapi1.apiary-mock.com/cars";
 
     useEffect(() => {
         let mounted = true;
